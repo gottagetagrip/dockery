@@ -1,0 +1,23 @@
+version: '3.8'
+ 
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: testdb
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+ 
+  client:
+    build: ./client
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+ 
+volumes:
+  dbdata:
+ 
